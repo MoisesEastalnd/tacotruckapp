@@ -1,28 +1,16 @@
-var expess = require("express");
-
-var PORT = process.env.PORT || 8792;
+var express = require("express");
 
 var app = express();
 
-app.use(express.static("public"));
+var PORT = process.env.PORT || 8792;
 
-// Parse application body as JSON
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 
-// Set Handlebars.
-var exphbs = require("express-handlebars");
 
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
+app.get("/",function(req,res) {
 
-// Import routes and give the server access to them.
-var routes = require("./controllers/tacos_Controller.js");
+    res.send("is the route working");
+});
 
-app.use(routes);
-
-// Start our server so that it can begin listening to client requests.
-app.listen(PORT, function() {
-  // Log (server-side) when our server has started
-  console.log("Server listening on: http://localhost:" + PORT);
+app.listen(PORT,function(){
+    console.log("server listening on" + PORT);
 });
